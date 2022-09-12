@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Vincent & Laura 22/10/2022</title>
+
+    <style>
+    </style>
+  <script type="module" crossorigin src="/bchain-frontend/assets/index.js"></script>
+  <link rel="stylesheet" href="/bchain-frontend/assets/index.css">
+</head>
+<body>
+
+<div id="app">
+    <div>
+        <div id="logo-container">
+            <h1 class="logo">Vincent & Laura</h1>
+
+            <p id="introduction-text" class="txt-center">Op zaterdag 22/10/22 gaan wij trouwen! Laat weten of je met ons
+                mee kan vieren.</p>
+        </div>
+
+
+        <div id="site-container" class="row">
+            <div class="col c1 container-overflow"></div>
+
+            <div id="content-container" class="col c6 cs12 txt-center">
+                <section id="alert-container">
+                    <div id="registration-success-alert" class="alert alert-success" v-if="isFormSendingSuccess">Wij
+                        hebben je
+                        registratie
+                        ontvangen!
+                    </div>
+                    <div id="registration-failed-alert" class="alert alert-danger" v-if="isFormSendingError">Er is
+                        iets misgegaan
+                        met de
+                        registratie, probeer later opnieuw.
+                    </div>
+                </section>
+
+                <h3 class="txt-center">Vul hier je gegevens in</h3>
+
+                <section id="form-container" @submit.prevent="checkForm">
+                    <form id="form">
+                        <section class="form-section">
+                            <p v-if="hasNameError" class="error-text">Je naam invullen is verplicht!</p>
+                            <label for="name-input">Naam</label>
+                            <input id="name-input" name="name" v-model="form.name">
+                        </section>
+
+                        <section class="form-section">
+                            <p v-if="hasAmountError" class="error-text">Het aantal meegeven is verplicht!</p>
+                            <p>Wij komen met <input class="input-inline" type="number" min="1" id="people-amount-input"
+                                                    name="people" v-model="form.amount"> personen</p>
+                        </section>
+
+                        <!-- food options -->
+                        <section id="food-container" class="form-section">
+                            <p v-if="hasFoodError" class="error-text">Eten kiezen is verplicht!</p>
+
+                            <div>
+                                <span>Wij eten</span>
+                                <ul id="food-list">
+                                    <li class="food-option" v-for="foodOption in foodOptions">
+                                        <input type="checkbox" :id="foodOption.value + '-option'"
+                                               :value="foodOption.value"
+                                               v-model="form.food">
+                                        <label class="food-option-label" :for="foodOption.value + '-option'">
+                                            {{ foodOption.label }}</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <section class="form-section">
+                            <label for="track-suggestion">Met deze plaat krijg je ons sowieso op de dansvloer:</label>
+
+                            <div class="row">
+                                <section class="col">
+                                    <img id="track-thumbnail" class="track-thumbnail" :src="thumbnail"/>
+                                </section>
+                                <section class="col c7">
+                                    <input id="track-suggestion" autocomplete="off" name="track-suggestion" class="fill"
+                                           placeholder="Zoek hier je nummer" v-model="form.trackSuggestion">
+                                </section>
+                            </div>
+                        </section>
+
+
+                        <section class="form-section">
+                            <p>Hier kan je allergieën, allergenen, wensen en alles wat je hartje beheert neer
+                                zetten</p>
+                            <textarea id="other-input" name="other" v-model="form.other"></textarea>
+                        </section>
+
+                        <button id="form-submit-button" class="btn" type="submit">Versturen</button>
+                    </form>
+                </section>
+            </div>
+
+            <div class="col c4">
+                <section id="image-container">
+                    <img id="banner-image-element" src="">
+                </section>
+            </div>
+
+            <div class="col c1 container-overflow"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
